@@ -21,7 +21,7 @@ The goal of this script is to make sure the RPC node contains all the bor-receip
 
 The script can be run with the following command:
     
-    node script.js --url <JSON-RPC node URL> --startBlock <starting block number>
+    node check.js --url <JSON-RPC node URL> --start-block <starting block number>
 
 
 ## Options
@@ -37,7 +37,7 @@ The script can be run with the following command:
 
 The following command checks for bor-receipts from block number 38598848, using a maximum of 10 concurrent calls to the JSON-RPC endpoint located at http://10.1.1.80:8765:
     
-        node index.js --url http://10.1.1.80:8765 --max-calls 10 --start-block 38598848
+        node check.js --url http://10.1.1.80:8765 --max-calls 10 --start-block 38598848
 
 ## Output
 
