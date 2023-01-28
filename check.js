@@ -1,6 +1,7 @@
 const Web3 = require('web3');
 const yargs = require('yargs');
 const Semaphore = require('semaphore-async-await').default;
+const ProgressBar = require('progress');
 
 const argv = yargs
     .option('url', {
@@ -34,9 +35,13 @@ async function checkTransaction(startBlockNumber) {
     } catch (err) {
         console.log(err);
     }
+    const bar = new ProgressBar('[:bar] :percent :current/:total :etas s', { total: latestBlockNumber-startBlockNumber });
     for (let i = startBlockNumber; i <= latestBlockNumber; i += 64) {
         await semaphore.acquire();
-        checkBlock(i).finally(() => semaphore.release());
+        checkBlock(i).finally(() => {
+            semaphore.release()
+            bar.tick(64);
+        });
     }
 }
 
